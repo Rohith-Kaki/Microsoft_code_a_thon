@@ -13,6 +13,17 @@ app.include_router(round1_router)
 app.include_router(round2_router)
 app.include_router(ws_router)
 
+# Allow CORS for local development (Streamlit runs on different port)
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.on_event("startup")
 def startup():

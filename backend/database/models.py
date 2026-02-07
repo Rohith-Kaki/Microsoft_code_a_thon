@@ -12,7 +12,7 @@ class Candidate(Base):
     name = Column(String, nullable=True)
     email = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    applications = relationship("Application", back_populates="candidate")
+    applications = relationship("Application", back_populates="candidate", lazy="joined")
 
 
 class Application(Base):
@@ -23,8 +23,8 @@ class Application(Base):
     resume_text = Column(String, nullable=True)
     jd_text = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    results = relationship("RoundResult", back_populates="application")
-    candidate = relationship("Candidate", back_populates="applications")
+    results = relationship("RoundResult", back_populates="application", lazy="joined")
+    candidate = relationship("Candidate", back_populates="applications", lazy="joined")
 
 
 class RoundResult(Base):
@@ -36,4 +36,4 @@ class RoundResult(Base):
     passed = Column(Integer, nullable=True)
     artifacts = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    application = relationship("Application", back_populates="results")
+    application = relationship("Application", back_populates="results", lazy="joined")

@@ -25,5 +25,8 @@ def run_python_code(code: str, timeout: int = 5) -> Tuple[int, str, str]:
 def run_code(language: str, code: str, timeout: int = 5):
     if language.lower() == "python":
         return run_python_code(code, timeout=timeout)
+    elif language.lower() == "java":
+        # Placeholder: Java execution not implemented in this runner for security.
+        return -2, "", "java-runner-not-implemented"
     else:
         return -2, "", "language-not-supported"
